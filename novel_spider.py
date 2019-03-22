@@ -32,12 +32,12 @@ class novel_download(object):
 
         self.novel_name = novel_name.string
 
-        ul = soup.find('ul', class_="_chapter")
-        a_href = BeautifulSoup(str(ul).replace('\n', ''), 'html.parser')
-        frist_url = a_href.find('a').get('href')
-
         if not self.custom_first_url:
             frist_url = self.custom_first_url
+        else:
+            ul = soup.find('ul', class_="_chapter")
+            a_href = BeautifulSoup(str(ul).replace('\n', ''), 'html.parser')
+            frist_url = a_href.find('a').get('href')
 
         self.novel_page_urls.append(frist_url)
         self.get_novel_content_next_link(frist_url)
